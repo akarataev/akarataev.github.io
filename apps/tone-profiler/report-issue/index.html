@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report an Issue - Tone Profiler</title>
+  <link rel="stylesheet" href="../assets/css/document.css">
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Tone Profiler</p>
+    <h1>Report an Issue</h1>
+    <p class="lede">Tell us if a tone, tuning, gear setting, or song detail looks wrong.</p>
+
+    <form class="form" action="https://formspree.io/f/maewywpk" method="POST">
+      <input type="hidden" name="_subject" value="Tone Profiler issue report">
+      <input type="hidden" name="source" value="song-card">
+
+      <div class="field">
+        <label for="song">Song title</label>
+        <input id="song" name="song_title" type="text" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="artist">Artist</label>
+        <input id="artist" name="artist_name" type="text" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="message">What looks wrong?</label>
+        <textarea id="message" name="message" placeholder="Wrong gear, tuning, signal chain order, missing part, or anything else." required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email">
+      </div>
+
+      <button type="submit">Send Report</button>
+    </form>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    function fillField(id, names) {
+      const input = document.getElementById(id);
+      const value = names.map((name) => params.get(name)).find(Boolean);
+
+      if (input && value) {
+        input.value = value;
+      }
+    }
+
+    fillField("song", ["songTitle", "song", "song_title"]);
+    fillField("artist", ["artistName", "artist", "artist_name"]);
+  </script>
+</body>
+</html>
